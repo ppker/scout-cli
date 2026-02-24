@@ -1,7 +1,7 @@
 command: docker scout push
 short: Push an image or image index to Docker Scout
 long: |
-    The `docker scout push` command lets you push an image or analysis result to Docker Scout.
+    The docker scout push command allows to push an image or image index to Docker Scout.
 usage: docker scout push IMAGE
 pname: docker scout
 plink: docker_scout.yaml
@@ -103,12 +103,7 @@ inherited_options:
       experimentalcli: false
       kubernetes: false
       swarm: false
-examples: |-
-    ### Push an image to Docker Scout
-
-    ```console
-    $ docker scout push --org my-org registry.example.com/repo:tag
-    ```
+examples: "  Push an image to Docker Scout\n  $ docker scout push --org my-org registry.example.com/repo:tag\e[0m"
 deprecated: false
 experimental: false
 experimentalcli: false

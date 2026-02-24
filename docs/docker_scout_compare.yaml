@@ -2,39 +2,40 @@ command: docker scout compare
 aliases: docker scout compare, docker scout diff
 short: Compare two images and display differences (experimental)
 long: |-
-    The `docker scout compare` command analyzes two images and displays a comparison.
+    The docker scout compare command analyzes two images and displays a comparison of both.
 
-    > This command is **experimental** and its behaviour might change in the future
+        This command is experimental and its behaviour might change in the future
 
-    The intended use of this command is to compare two versions of the same image.
-    For instance, when a new image is built and compared to the version running in production.
+    The main usage is to compare two versions of the same image.
+    For instance when a new image is built and compared to the version running in production.
 
-    If no image is specified, the most recently built image is used
-    as a comparison target.
+    If no image is specified, the most recently built image will be used.
 
     The following artifact types are supported:
 
     - Images
     - OCI layout directories
-    - Tarball archives, as created by `docker save`
+    - Tarball archives, as created by docker save
     - Local directory or file
+
+    The tool analyzes the provided software artifact, and generates a vulnerability report.
 
     By default, the tool expects an image reference, such as:
 
-    - `redis`
-    - `curlimages/curl:7.87.0`
-    - `mcr.microsoft.com/dotnet/runtime:7.0`
+    - redis
+    - curlimages/curl:7.87.0
+    - mcr.microsoft.com/dotnet/runtime:7.0
 
     If the artifact you want to analyze is an OCI directory, a tarball archive, a local file or directory,
     or if you want to control from where the image will be resolved, you must prefix the reference with one of the following:
 
-    - `image://` (default) use a local image, or fall back to a registry lookup
-    - `local://` use an image from the local image store (don't do a registry lookup)
-    - `registry://` use an image from a registry (don't use a local image)
-    - `oci-dir://` use an OCI layout directory
-    - `archive://` use a tarball archive, as created by `docker save`
-    - `fs://` use a local directory or file
-    - `sbom://` SPDX file or in-toto attestation file with SPDX predicate or `syft` json SBOM file
+    - image:// (default) use a local image, or fall back to a registry lookup
+    - local:// use an image from the local image store (don't do a registry lookup)
+    - registry:// use an image from a registry (don't use a local image)
+    - oci-dir:// use an OCI layout directory
+    - archive:// use a tarball archive, as created by docker save
+    - fs:// use a local directory or file
+    - sbom:// use an SBOM as SPDX file or in-toto attestation file with SPDX predicate or syft json SBOM file
 usage: docker scout compare --to IMAGE|DIRECTORY|ARCHIVE [IMAGE|DIRECTORY|ARCHIVE]
 pname: docker scout
 plink: docker_scout.yaml
@@ -336,42 +337,7 @@ inherited_options:
       experimentalcli: false
       kubernetes: false
       swarm: false
-examples: |-
-    ### Compare the most recently built image to the latest tag
-
-    ```console
-    $ docker scout compare --to namespace/repo:latest
-    ```
-
-    ### Compare local build to the same tag from the registry
-
-    ```console
-    $ docker scout compare local://namespace/repo:latest --to registry://namespace/repo:latest
-    ```
-
-    ### Ignore base images
-
-    ```console
-    $ docker scout compare --ignore-base --to namespace/repo:latest namespace/repo:v1.2.3-pre
-    ```
-
-    ### Generate a markdown output
-
-    ```console
-    $ docker scout compare --format markdown --to namespace/repo:latest namespace/repo:v1.2.3-pre
-    ```
-
-    ### Only compare maven packages and only display critical vulnerabilities for maven packages
-
-    ```console
-    $ docker scout compare --only-package-type maven --only-severity critical --to namespace/repo:latest namespace/repo:v1.2.3-pre
-    ```
-
-    ### Show all policy results for both images
-
-    ```console
-    docker scout compare --to namespace/repo:latest namespace/repo:v1.2.3-pre
-    ```
+examples: "  Compare the most recently built image to a reference\n  $ docker scout compare --to namespace/repo:latest\e[0m\n\n  Compare an image to the latest tag\n  $ docker scout compare --to namespace/repo:latest namespace/repo:v1.2.3-pre\e[0m\n\n  Compare a local build to the same tag from the registry\n  $ docker scout compare local://namespace/repo:v1.2.3 --to registry://namespace/repo:v1.2.3\e[0m\n\n  Ignore base images\n  $ docker scout compare --ignore-base --to namespace/repo:latest namespace/repo:v1.2.3-pre\e[0m\n\n  Generate a markdown output\n  $ docker scout compare --format markdown --to namespace/repo:latest namespace/repo:v1.2.3-pre\e[0m\n\n  Only compare maven packages and only display critical vulnerabilities for maven packages\n  $ docker scout compare --only-package-type maven --only-severity critical --to namespace/repo:latest namespace/repo:v1.2.3-pre\e[0m"
 deprecated: false
 experimental: false
 experimentalcli: true
