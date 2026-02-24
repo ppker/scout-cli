@@ -1,11 +1,8 @@
 command: docker scout policy
 short: |
     Evaluate policies against an image and display the policy evaluation results (experimental)
-long: |-
-    The `docker scout policy` command evaluates policies against an image.
-    The image analysis is uploaded to Docker Scout where policies get evaluated.
-
-    The policy evaluation results may take a few minutes to become available.
+long: |
+    The docker scout policy command evaluates policies against an image and displays the policy evaluation results. If the policy results for an image are already available in the Scout platform, they are retrieved from there, otherwise the policies are evaluated locally. It can also compare policy results for a repository in a specific environment.
 usage: docker scout policy [IMAGE | REPO]
 pname: docker scout
 plink: docker_scout.yaml
@@ -108,30 +105,7 @@ inherited_options:
       experimentalcli: false
       kubernetes: false
       swarm: false
-examples: |-
-    ### Evaluate policies against an image and display the results
-
-    ```console
-    $ docker scout policy dockerscoutpolicy/customers-api-service:0.0.1
-    ```
-
-    ### Evaluate policies against an image for a specific organization
-
-    ```console
-    $ docker scout policy dockerscoutpolicy/customers-api-service:0.0.1 --org dockerscoutpolicy
-    ```
-
-    ### Evaluate policies against an image with a specific platform
-
-    ```console
-    $ docker scout policy dockerscoutpolicy/customers-api-service:0.0.1 --platform linux/amd64
-    ```
-
-    ### Compare policy results for a repository in a specific environment
-
-    ```console
-    $ docker scout policy dockerscoutpolicy/customers-api-service --to-env production
-    ```
+examples: "  Evaluate policies against an image:\n  $ docker scout policy IMAGE\e[0m\n\n  Evaluate policies against an image for a specific organization:\n  $ docker scout policy IMAGE --org ORG\e[0m\n\n  Evaluate policies against an image with a specific platform:\n  $ docker scout policy IMAGE --platform PLATFORM\e[0m\n\n  Compare policy results for a repository in a specific environment:\n  $ docker scout policy REPO --to-env ENV\e[0m"
 deprecated: false
 experimental: false
 experimentalcli: true
