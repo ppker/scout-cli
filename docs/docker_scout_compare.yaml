@@ -69,6 +69,7 @@ options:
         Output format of the generated vulnerability report:
         - text: default output, plain text with or without colors depending on the terminal
         - markdown: Markdown output
+        - json: JSON output
       deprecated: false
       hidden: false
       experimental: false
